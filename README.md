@@ -1,3 +1,15 @@
+# p-geolocation
+Web app to estimate a user's location with two images of the sun. 
+
+# To create the React App:
+> npx create-react-app p-geolocation
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

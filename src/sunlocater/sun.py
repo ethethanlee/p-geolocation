@@ -20,5 +20,5 @@ def sun_locater(image):
     print("Coordinates of the sun: ({}, {})".format(center_x, center_y))
 
 
-sun_locater("sunimage1.jpeg")
-sun_locater("sunimage2.jpeg")
+sun_locater("src/sunlocater/sunimage1.jpeg")
+sun_locater("src/sunlocater/sunimage2.jpeg")

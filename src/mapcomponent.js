@@ -6,7 +6,7 @@ export class MapComponent extends Component {
   render() {
     return (
       <div>
-        <h1>Hi! Here is a map component: </h1> <br />
+        <h1>Hi! Here is a map component hello hello: </h1> <br />
         {/* <MapComponent /> */}
       </div>
     );

@@ -1,4 +1,4 @@
-// import MapComponent from './MapComponent';
+import MapComponent from './mapcomponent';
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div>
         <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />
-        {/* <MapComponent /> */}
+        <MapComponent />
       </div>
     );
   }

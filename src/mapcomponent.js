@@ -50,11 +50,11 @@ export class MapComponent extends Component {
     console.log('Rendering component');
     return (
       <div>
-        <h1>Here is your location:</h1>
-        <div id='map' style={{ width: '100%', height: '550px' }}></div>
+        <h1>Hi! Here is a map component hello hello: </h1> <br />
+        {/* <MapComponent /> */}
       </div>
     );
   }
 }
 
-
+export default MapComponent;

@@ -62,8 +62,11 @@ class App extends Component {
     return (
       <div>
         <h1>Hi! Welcome to p-geolocation. </h1> <br />
+<<<<<<< HEAD
         <button onClick={() => this.click()}>Click this!</button>
 
+=======
+>>>>>>> 4743cf1 (Co-authored-by: George Axarlis <georgeaxa@users.noreply.github.com>)
         <MapComponent />
       </div>
     );

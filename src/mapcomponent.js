@@ -51,20 +51,23 @@ class MapComponent extends Component {
   constructor(props) {
     super(props);
     this.map = null;
+    this.loader = new Loader({  
+      apiKey: process.env.REACT_APP_API_KEY, 
+      version: "weekly",
+      libraries: ["places"],
+    });
   }
 
   componentDidMount() {
+    console.log('Component did mount');
     this.initMap();
   }
 
   initMap() {
-    const loader = new Loader({
-      apiKey: process.env.api_key, // Replace with your Google Maps API key
-      version: "weekly",
-      libraries: ["places"],
-    });
+    console.log('Initializing map');
 
-    loader.load().then(() => {
+    this.loader.load().then(() => {
+      console.log('Google Maps loaded');
       const position = { lat: 34.100010, lng: -117.714802 };
 
       // Create a map
@@ -73,6 +76,8 @@ class MapComponent extends Component {
         center: position,
         mapId: "estella",
       });
+
+      console.log('Map initialized');
 
       // Create a marker
       new window.google.maps.Marker({
@@ -101,6 +106,10 @@ class MapComponent extends Component {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> faa2d2d (map w api key)
 export default MapComponent;
 =======
 export default MapComponent;

@@ -19,7 +19,7 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />
+        <h1>Hi! Welcome to p-geolocation. </h1> <br />
         <MapComponent />
       </div>
     );

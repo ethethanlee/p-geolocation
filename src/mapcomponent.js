@@ -1,73 +1,50 @@
 import React, { Component } from 'react';
+import { Loader } from '@googlemaps/js-api-loader';
 
-export class MapComponent extends Component {
-
-  initMap() { 
-    console.log("initMap is called");
+class MapComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.map = null;
   }
-  
-  async componentDidMount() {
-    console.log('componentDidMount is called');
-    const googleMapsAPI = await loadGoogleMapsAPI();
-    if (!googleMapsAPI) {
-      console.error('Failed to load Google Maps API');
-      return;
-    }
 
-    const position = { lat: 40.183506, lng: 22.127185 };
-    console.log('Position:', position);
+  componentDidMount() {
+    this.initMap();
+  }
 
-    // centering map
-    const map = new googleMapsAPI.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: position,
-      mapId: "estella",
+  initMap() {
+    const loader = new Loader({
+      apiKey: process.env.api_key, // Replace with your Google Maps API key
+      version: "weekly",
+      libraries: ["places"],
     });
-    console.log('Map:', map);
 
-    // marker
-    new googleMapsAPI.Marker({
-      position: position,
-      map: map,
-      title: "Estella",
-    });
-    console.log('Marker', position)
-    
-    async function loadGoogleMapsAPI() {
-      if (window.google) {
-        console.log("Google Maps API loaded.");
-        return window.google.maps;
-      }
-    
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        const api_key = process.env.api_key;
-          console.log(api_key);
-        script.src = script.src = 'https://maps.googleapis.com/maps/api/js?key='+api_key+'&libraries=maps&callback=initMap';
-        ;
-        script.async = true;
-        script.defer = true;
-        script.onerror = reject;
-        window.initMap = () => {
-          console.log("Google Maps API loaded successfully.");
-          resolve(window.google.maps);
-          delete window.initMap;
-        };
-    
-        document.head.appendChild(script);
+    loader.load().then(() => {
+      const position = { lat: 34.100010, lng: -117.714802 };
+
+      // Create a map
+      this.map = new window.google.maps.Map(document.getElementById("map"), {
+        zoom: 17,
+        center: position,
+        mapId: "estella",
       });
-    }
+
+      // Create a marker
+      new window.google.maps.Marker({
+        position: position,
+        map: this.map,
+        title: "Estella",
+      });
+    });
   }
 
   render() {
     return (
       <div>
-        <h1>Hi! Here is a map component: </h1>
-        <div id="map" style={{ width: '100%', height: '400px' }}></div>
+        <h1>Here is your location:</h1>
+        <div id="map" style={{ width: '100%', height: '550px' }}></div>
       </div>
     );
   }
 }
-
 
 export default MapComponent;

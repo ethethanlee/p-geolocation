@@ -7,6 +7,7 @@ app = Flask(__name__)
 def get_data(image_path):
     # Call the process_data function with the provided image_path
     data = process_data(image_path)
+    # Data isn't going to be date, but longitute data.
     print("json: " , jsonify(data))
     return jsonify(data)
 

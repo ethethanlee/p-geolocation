@@ -2,6 +2,9 @@ import MapComponent from './mapcomponent';
 import React, { Component } from 'react';
 
 class App extends Component {
+  // add a button to call function fetch. 
+  // <button onclick=function>
+  
   render() {
 
     fetch('/sun_data_route')

@@ -23,7 +23,7 @@ export class MapComponent extends Component {
   initMap() {
     console.log('Initializing map');
 
-    this.loader.load().then(() => {
+    this.loader.load().then(async () => {
       console.log('Google Maps loaded');
       const position = { lat: 34.100010, lng: -117.714802 };
 

@@ -20,7 +20,7 @@ def sun_locater(image):
 
     center_x, center_y = int(center_x), int(center_y)
 
-    print("Coordinates of the sun: ({}, {})".format(center_x, center_y))
+    # print("Coordinates of the sun: ({}, {})".format(center_x, center_y))
     return center_x, center_y
 
 
@@ -40,7 +40,7 @@ def find_horizon_line(image):
 
     # Create a line representing the horizon
     horizon_line = [0, horizon_row, image.shape[1], horizon_row]
-    print("Horizon Line:", horizon_line)
+    # print("Horizon Line:", horizon_line)
 
     return horizon_line
 
@@ -55,6 +55,7 @@ def draw_horizon_line(image, horizon_line):
     cv2.destroyAllWindows()
 
 
+
 def process_data(image_path):
     # Read the image
     image = cv2.imread(image_path)
@@ -62,17 +63,18 @@ def process_data(image_path):
     sun_coordinates = sun_locater(image)
     horizon_line = find_horizon_line(image)
 
-    data = {'Sun x coordinate': sun_coordinates[0],
-            'Sun y coordinate': sun_coordinates[1],
-            'Horizon Line': horizon_line}
+    data = {'longitude': sun_coordinates[0],
+            'latitude': sun_coordinates[1]}
 
     return data
 
 
 # Replace with the actual image path
+"""
 image_path = "src/sunlocater/sunimage1.jpeg"
 result = process_data(image_path)
 print(result)
 
 
 print(process_data("src/sunlocater/sunimage1.jpeg"))
+"""

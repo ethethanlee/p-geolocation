@@ -1,20 +1,7 @@
 import math
-# import datetime
 from PIL import Image
 from PIL.ExifTags import TAGS
-# import pillow_heif
-# import pyheif
-# import piexif
-# import numpy
-# Take in two ordered pairs of pixel coordinates and output some region or lat long coords
-# coords: [(123,123), (156,100)]
-# dates: 
 
-# lets just give longitude 120
-
-
-# option a - predict exactly when the sun is going to set then just put a mark for every timezone
-    # so we will maybe ask the user if they are surrounded by water
 
 
 class ConversionComponent:
@@ -96,40 +83,7 @@ class ConversionComponent:
         June solstice to September equinox: 93.65 days
         September equinox to December solstice: 89.84 days <<
         """""
-        # given the number from that division, subtract it from the angle found by the pixel coords function
-        # whatever that number is is our distance from the equator!
-    
-
-    
-    # given sunset prediction, look into database 
-    # can i predict longitude based on how fast the sun is moving?
-
-
-    '''This function takes in a heic image and creates a jpg version of it; 
-        i believe it preservees metadata but not sure'''
-    # def heic_to_jpg(self): 
-    #     file_path_heic = './IMG_9562.heic'
-    #     file_path_jpg = './output2.jpg'
-
-    #     heif_file = pyheif.read('./IMG_9562.HEIC')
-    #     # Creation of image 
-    #     image = Image.frombytes(
-    #         heif_file.mode,
-    #         heif_file.size,
-    #         heif_file.data,
-    #         "raw",
-    #         heif_file.mode,
-    #         heif_file.stride,
-    #     )
-    #     # Retrive the metadata
-    #     for metadata in heif_file.metadata or []:
-    #         if metadata['type'] == 'Exif':
-    #             exif_dict = piexif.load(metadata['data'])
-
-    #     # PIL rotates the image according to exif info, so it's necessary to remove the orientation tag otherwise the image will be rotated again (1° time from PIL, 2° from viewer).
-    #     exif_dict['0th'][274] = 0
-    #     exif_bytes = piexif.dump(exif_dict)
-    #     image.save(file_path_jpg, "JPG", exif=exif_bytes)
+ 
 
     def get_datetime_metadata(self, imagename):
         # path to the image or video
@@ -154,23 +108,8 @@ class ConversionComponent:
 
         return(data_array[9])
         
-        # print(data)
 
-        # datetime_list = []
-        # for i in exifdata.values:
-        #     datetime_list.append(i)
-        # print(datetime_list[10])
-
-        # print(exifdata[DateTime])
-        
-        # print('hi')
-
-
-imagename = "./IMG_9562.jpg"
 object = ConversionComponent()
-# print(object.get_datetime_metadata(imagename)[5:]) # returns correctly
-# print(object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]))
-# print(object.day_of_year("10:04 19:32:41", True))
 
 
-print(object.angle_to_latitude(object.get_datetime_metadata(imagename), object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]), object.pixel_coords_to_angle([(123,123), (156,100)])[1]))
+# print(object.angle_to_latitude(object.get_datetime_metadata(imagename), object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]), object.pixel_coords_to_angle([(123,123), (156,100)])[1]))

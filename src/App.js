@@ -25,7 +25,7 @@ class App extends Component {
       .then(data => {
         console.log(data);
         // Handle the data in your React app
-        this.setState({ coordinates: data });
+        this.setState({ coordinates : data });
       // Handle the data in your React app
       })
       .catch(error => {

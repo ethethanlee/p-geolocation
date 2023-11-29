@@ -1,7 +1,7 @@
 import math
 # import datetime
-from PIL import Image
-from PIL.ExifTags import TAGS
+# from PIL import Image
+# from PIL.ExifTags import TAGS
 # import pillow_heif
 # import pyheif
 # import piexif
@@ -18,10 +18,10 @@ from PIL.ExifTags import TAGS
 
 
 class ConversionComponent:
-
+    
     '''calculate the angle between the two coords assuming that
     the horizon is aligned with the horizontal plane of our picture
-
+ 
     returns a tuple (angle in radians, whether the sun is setting {so True for setting and False for rising})'''
     def pixel_coords_to_angle(self, coords):
         adjacent_side = coords[0][1] - coords[1][1]

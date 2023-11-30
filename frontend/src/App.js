@@ -41,10 +41,9 @@ class App extends Component {
 
     return (
       <div>
-        <Router>
+        {/* <Router>
           <div>
             <nav>
-              {/* Use Link components for navigation */}
               <ul>
                 <li>
                   <Link to="/">Home</Link>
@@ -58,12 +57,11 @@ class App extends Component {
               </ul>
             </nav>
 
-            {/* Define routes for different pages */}
             <Route path="/" exact component={App} />
             <Route path="/about" component={AboutPage} />
             <Route path="/contact" component={ContactPage} />
           </div>
-        </Router>
+        </Router> */}
 
         <div>
           <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />

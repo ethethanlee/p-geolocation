@@ -1,15 +1,16 @@
-import {MapComponent} from './mapcomponent';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { AboutPage } from './AboutPage';
-import { ContactPage } from './ContactPage';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { HomePage } from './pages/HomePage';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       coordinates: null,
-      locationInput: '', // assuming you have this state variable
+      locationInput: '',
+      showMap: false,
     };
   }
 
@@ -20,74 +21,62 @@ class App extends Component {
   fetchFunction = () => {
     const { locationInput } = this.state;
 
-    // Implement your fetch logic here
     fetch(`http://127.0.0.1:3000/sun_data_route/${encodeURIComponent(locationInput)}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        // Handle the data in your React app
-        this.setState({ coordinates : data });
-      // Handle the data in your React app
+        this.setState({ coordinates: data, showMap: true });
       })
       .catch(error => {
         console.error('Error!!!:', error);
       });
-        console.log('Fetching data...');
+    console.log('Fetching data...');
+  };
+
+  clickMap = () => {
+    this.setState({ showMap: true });
   };
 
   render() {
-    // setting up variable
-    const { coordinates, locationInput } = this.state;
+    const { coordinates, locationInput, showMap } = this.state;
 
     return (
-      <div>
-        {/* <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <Link to="/contact">Contact</Link>
-                </li>
-              </ul>
-            </nav>
-
-            <Route path="/" exact component={App} />
-            <Route path="/about" component={AboutPage} />
-            <Route path="/contact" component={ContactPage} />
-          </div>
-        </Router> */}
-
+      <Router>
         <div>
-          <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ul>
+          </nav>
 
-          <label>
-            Enter Image Path:
-            <input type="text" value={locationInput} onChange={this.handleInputChange} />
-          </label>
-
-          {/* Button to trigger the fetch function */}
-          <button onClick={this.fetchFunction}>Fetch Data!</button>
-
-          {/* Display Coordinates if they exist*/}
-          {coordinates && (
-            <div>
-              <p>Latitude: {coordinates.longitude}</p>
-              <p>Longitude: {coordinates.latitude}</p>
-            </div>
-          )}
-
-          <MapComponent />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  coordinates={coordinates}
+                  locationInput={locationInput}
+                  showMap={showMap}
+                  handleInputChange={this.handleInputChange}
+                  fetchFunction={this.fetchFunction}
+                  clickMap={this.clickMap}
+                />
+              }
+            />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
         </div>
-      </div>
+      </Router>
     );
   }
 }
-  
 
 export default App;

@@ -1,5 +1,8 @@
 import {MapComponent} from './mapcomponent';
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { AboutPage } from './AboutPage';
+import { ContactPage } from './ContactPage';
 
 class App extends Component {
   constructor(props) {
@@ -38,25 +41,51 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />
-
-        <label>
-          Enter Image Path:
-          <input type="text" value={locationInput} onChange={this.handleInputChange} />
-        </label>
-
-        {/* Button to trigger the fetch function */}
-        <button onClick={this.fetchFunction}>Fetch Data!</button>
-
-        {/* Display Coordinates if they exist*/}
-        {coordinates && (
+        <Router>
           <div>
-            <p>Latitude: {coordinates.longitude}</p>
-            <p>Longitude: {coordinates.latitude}</p>
-          </div>
-        )}
+            <nav>
+              {/* Use Link components for navigation */}
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <Link to="/contact">Contact</Link>
+                </li>
+              </ul>
+            </nav>
 
-        <MapComponent />
+            {/* Define routes for different pages */}
+            <Route path="/" exact component={App} />
+            <Route path="/about" component={AboutPage} />
+            <Route path="/contact" component={ContactPage} />
+          </div>
+        </Router>
+
+        <div>
+          <h1>Hi! Welcome to p-geolocation. Here is a map component: </h1> <br />
+
+          <label>
+            Enter Image Path:
+            <input type="text" value={locationInput} onChange={this.handleInputChange} />
+          </label>
+
+          {/* Button to trigger the fetch function */}
+          <button onClick={this.fetchFunction}>Fetch Data!</button>
+
+          {/* Display Coordinates if they exist*/}
+          {coordinates && (
+            <div>
+              <p>Latitude: {coordinates.longitude}</p>
+              <p>Longitude: {coordinates.latitude}</p>
+            </div>
+          )}
+
+          <MapComponent />
+        </div>
       </div>
     );
   }

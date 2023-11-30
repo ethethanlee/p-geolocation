@@ -4,6 +4,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 /**
  * Initializes and loads a Google map with a marker on a specified location embedded in the webpage
  */
+
 export class MapComponent extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,7 @@ export class MapComponent extends Component {
 
   componentDidMount() {
     console.log('Component did mount');
+    console.log(process.env.REACT_APP_API_KEY);
     this.initMap();
   }
 

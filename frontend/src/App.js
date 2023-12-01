@@ -4,40 +4,41 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { HomePage } from './pages/HomePage';
 
+
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       coordinates: null,
-      locationInput: '',
       showMap: false,
+      selectedFiles: [],
     };
+
   }
 
-  handleInputChange = (event) => {
-    this.setState({ locationInput: event.target.value });
-  };
 
-  fetchFunction = () => {
-    const { locationInput } = this.state;
+  // onFileChange = (event) => {
+  //   const files = event.target.files;
+  //   if (files.length === 2) {
+  //     this.setState({ selectedFiles: files });
+  //   } else {
+  //     alert('Please select exactly two files.');
+  //     event.target.value = null; // Reset the file input
+  //   }
+  // };
 
-    fetch(`http://127.0.0.1:3000/sun_data_route/${encodeURIComponent(locationInput)}`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ coordinates: data, showMap: true });
-      })
-      .catch(error => {
-        console.error('Error!!!:', error);
-      });
-    console.log('Fetching data...');
-  };
+  // handleInputChange = (event) => {
+  //   this.setState({ locationInput: event.target.value });
+  // };
+  
 
   clickMap = () => {
     this.setState({ showMap: true });
   };
 
   render() {
-    const { coordinates, locationInput, showMap } = this.state;
+    const { coordinates, showMap } = this.state;
 
     return (
       <Router>
@@ -62,10 +63,8 @@ class App extends Component {
               element={
                 <HomePage
                   coordinates={coordinates}
-                  locationInput={locationInput}
                   showMap={showMap}
-                  handleInputChange={this.handleInputChange}
-                  fetchFunction={this.fetchFunction}
+                  fetchFunction={this.onFileUpload}
                   clickMap={this.clickMap}
                 />
               }

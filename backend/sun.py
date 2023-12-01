@@ -63,8 +63,7 @@ def process_data(image_path):
     sun_coordinates = sun_locater(image)
     horizon_line = find_horizon_line(image)
 
-    data = {'longitude': sun_coordinates[0],
-            'latitude': sun_coordinates[1]}
+    data = (sun_coordinates[0], sun_coordinates[1])
 
     return data
 

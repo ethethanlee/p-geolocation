@@ -112,4 +112,6 @@ class ConversionComponent:
 object = ConversionComponent()
 
 
-# print(object.angle_to_latitude(object.get_datetime_metadata(imagename), object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]), object.pixel_coords_to_angle([(123,123), (156,100)])[1]))
+# print(object.angle_to_latitude(object.get_datetime_metadata(imagename), 
+# object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]), 
+# object.pixel_coords_to_angle([(123,123), (156,100)])[1]))

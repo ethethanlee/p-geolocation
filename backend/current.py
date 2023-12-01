@@ -1,6 +1,7 @@
 import math
 from PIL import Image
 from PIL.ExifTags import TAGS
+import sys
 
 
 
@@ -89,6 +90,9 @@ class ConversionComponent:
         # path to the image or video
 
         # read the image data using PIL
+        print(imagename, file=sys.stderr)
+
+        print('here lies someth9hng \n\n\n\n\n', file=sys.stderr)
         image = Image.open(imagename)
 
         # get exifdata from the image and assign vbl metadata extraction

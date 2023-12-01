@@ -83,7 +83,7 @@ export class HomePage extends Component {
     const { coordinates, showMap, clickMap } = this.props;
 
     return (
-      <div>
+      <div style={{ paddingLeft: '20px' }}>
         <h1>Home</h1>
         <p>Welcome to p-geolocation!</p>
         <label>

@@ -12,6 +12,8 @@ CORS(app, resources={r"/sun_data_route/*": {"origins": "http://localhost:3000"}}
 
 @app.route('/sun_data_route/<locationInput>/<locationInput2>', methods=['GET', 'POST'])
 def get_data(locationInput, locationInput2):
+
+    print('a;lksjdf;laksdfj ;laksd f;laksd f;alsk dfj;alsk djf;lak sd;fl kas dj;flk')
     #data = process_data()
     object = ConversionComponent()
     # Data isn't going to be date, but longitute data.

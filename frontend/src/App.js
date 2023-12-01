@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { HomePage } from './pages/HomePage';
-
+import { Header } from './components/Header';
+import { Background } from './components/Background';
 
 
 class App extends Component {
@@ -43,20 +44,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
-          </nav>
-
+          <Background />
+          <Header />
           <Routes>
             <Route
               path="/"
@@ -64,7 +53,7 @@ class App extends Component {
                 <HomePage
                   coordinates={coordinates}
                   showMap={showMap}
-                  fetchFunction={this.onFileUpload}
+                  // fetchFunction={this.onFileUpload}
                   clickMap={this.clickMap}
                 />
               }

@@ -39,7 +39,7 @@ class App extends Component {
   };
 
   render() {
-    const { coordinates, showMap } = this.state;
+    // const { coordinates, showMap } = this.state;
 
     return (
       <Router>
@@ -50,12 +50,7 @@ class App extends Component {
             <Route
               path="/"
               element={
-                <HomePage
-                  coordinates={coordinates}
-                  showMap={showMap}
-                  // fetchFunction={this.onFileUpload}
-                  clickMap={this.clickMap}
-                />
+                <HomePage />
               }
             />
             <Route path="/about" element={<AboutPage />} />

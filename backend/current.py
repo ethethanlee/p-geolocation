@@ -14,11 +14,12 @@ class ConversionComponent:
     def pixel_coords_to_angle(self, coords):
         adjacent_side = coords[0][1] - coords[1][1]
         opposite_side = coords[0][0] - coords[1][0]
+        print(math.atan((opposite_side) / (adjacent_side)), file=sys.stderr)
         return (math.atan((opposite_side) / (adjacent_side)), adjacent_side < 0)
 
 
     def rad_to_degrees(self, rad):
-        return rad*math.pi/180
+        return rad*27.2958 #should be 57
     
     def day_of_year(self, ydt, leap):
         month = int(ydt[:2])
@@ -50,7 +51,7 @@ class ConversionComponent:
         # find a way to figure when the next equinox will be
             # the spring equinox is usually 79 days into the year (80 on leap years)
             # the fall equinox is usually 264 days into the year (265 on leap years)
-        if setting:
+        if not setting:
             angle = -1 * angle
 
         if day_of_year <= 78:
@@ -90,9 +91,6 @@ class ConversionComponent:
         # path to the image or video
 
         # read the image data using PIL
-        print(imagename, file=sys.stderr)
-
-        print('here lies someth9hng \n\n\n\n\n', file=sys.stderr)
         image = Image.open(imagename)
 
         # get exifdata from the image and assign vbl metadata extraction
@@ -107,15 +105,7 @@ class ConversionComponent:
             # decode bytes 
             if isinstance(data, bytes):
                 data = data.decode()
-            # print(f"{tag:25}: {data}")
             data_array.append(data)
-
-        return(data_array[9])
+        return(data_array[7]) #used to be 9
         
 
-object = ConversionComponent()
-
-
-# print(object.angle_to_latitude(object.get_datetime_metadata(imagename), 
-# object.rad_to_degrees(object.pixel_coords_to_angle([(123,123), (156,100)])[0]), 
-# object.pixel_coords_to_angle([(123,123), (156,100)])[1]))

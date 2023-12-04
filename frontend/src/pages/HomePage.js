@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
 import { MapComponent } from '../mapcomponent'; // Adjust the path as needed
+import Button from '@mui/material/Button';
+
+
+const Overlay = () => {
+  const overlayStyle = {
+    position: 'fixed',
+    top: '64px',
+    left: 0,
+    width: '100%',
+    height: 'calc(100% - 64px)',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    zIndex: 0,
+  };
+  return <div style={overlayStyle}></div>;
+};
 
 export class HomePage extends Component {
 
@@ -8,22 +23,22 @@ export class HomePage extends Component {
     this.state = {
       showMap: false,
       selectedFiles: [],
+      latitude: 0,
+      longitude: 0,
     };
 
   }
 
-  onFileChange = (event) => {
+  onFileChange = async (event) => {
     const files = event.target.files;
     if (files.length === 2) {
       this.setState({ selectedFiles: files });
     } else {
       alert('Please select exactly two files.');
       event.target.value = null; // Reset the file input
-    }
-  };
+    } 
 
-  onFileUpload = async () => {
-    const { selectedFiles } = this.state;
+    // const { selectedFiles } = this.state;
 
     console.log('starting...');
 
@@ -35,15 +50,15 @@ export class HomePage extends Component {
     try {
       const formData = new FormData();
 
-      for (let i = 0; i < selectedFiles.length; i++) {
-        formData.append(`myFiles[${i}]`, selectedFiles[i], selectedFiles[i].name);
+      for (let i = 0; i < files.length; i++) {
+        formData.append(`myFiles[${i}]`, files[i], files[i].name);
       }
 
       console.log('a')
-      console.log(selectedFiles.length)
+      console.log(files.length)
       // defining two image file names to use for parameter
-      const locationInput = selectedFiles[0].name;
-      const locationInput2 = selectedFiles[1].name;
+      const locationInput = files[0].name;
+      const locationInput2 = files[1].name;
 
       console.log('b')
       // route
@@ -59,49 +74,87 @@ export class HomePage extends Component {
         const responseData = await response.json();
         console.log('Response from Flask:', responseData);
         // Handle response data as needed
+        this.setState({
+          latitude: responseData.latitude,
+          longitude: responseData.longitude,
+          showMap: true,
+        })
+
       } else {
         throw new Error('Failed to send data to Flask');
       }
     } catch (error) {
-      console.error('Error while sending data to Flask:', error);
+      alert('Error while sending data to Flask:', error);
       // Handle error
     }
 
-
-    // fetch(`http://127.0.0.1:3000/sun_data_route/${encodeURIComponent(locationInput)}`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState({ coordinates: data, showMap: true });
-    //   })
-    //   .catch(error => {
-    //     console.error('Error!!!:', error);
-    //   });
-    // console.log('Fetching data...');
   };
 
   render() {
-    const { coordinates, showMap, clickMap } = this.props;
+
+    const fileInputStyle = {
+      display: 'none',
+    }
+
+    const centerContainerStyle = {
+      // display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh', // Ensures full viewport height
+    };
+
+    const boxStyle = {
+      backgroundColor: '#76ABDF',
+      borderRadius: '20px',
+      padding: '20px',
+      border: '2px solid white',
+    };
 
     return (
-      <div style={{ paddingLeft: '20px' }}>
-        <h1>Home</h1>
-        <p>Welcome to p-geolocation!</p>
-        <label>
-        </label>
-        <input type="file" accept="image/*" multiple onChange={this.onFileChange}/>
-        <button onClick={this.onFileUpload}>Upload Two Images</button>
+      <div style={centerContainerStyle} > <Overlay />
+        <div style={{ position: 'relative', textAlign: 'center' }}>
+        <div style={{ paddingLeft: '20px', fontFamily: 'Poppins, sans-serif', color: 'white'}}>
+          <br />
+          <h1 s>Welcome to p-geolocation!</h1>
+          <p>Upload two images of the sun!</p>
+          <Button
+            component="label"
+            htmlFor="fileInput"
+            sx={{
+              backgroundColor: '#FFFFFF',
+              color: 'black',
+              padding: '10px 20px',
+              borderRadius: '50px',
+              textTransform: 'uppercase',
+              fontWeight: 'bold',
+              '&:hover': {
+                backgroundColor: '#DADEDF',
+              },
+            }}
+          >
+            Upload Two Images
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              multiple
+              style={fileInputStyle}
+              onChange={this.onFileChange}
+            />
+          </Button>
 
-        {coordinates && (
-          <div>
-            <p>Latitude: {coordinates.longitude}</p>
-            <p>Longitude: {coordinates.latitude}</p>
-          </div>
-        )}
+          {/* {coordinates && (
+            <div>
+              <p>Latitude: {coordinates.longitude}</p>
+              <p>Longitude: {coordinates.latitude}</p>
+            </div>
+          )} */}
 
-        <button onClick={clickMap}>Show Map</button>
+          {/* <button onClick={clickMap}>Show Map</button> */}
 
-        {showMap && <MapComponent />}
-      </div>
+          {this.state.showMap && <MapComponent coordinates={[this.state.latitude, this.state.longitude]} />}
+        </div></div>
+        </div>
     );
   }
 }

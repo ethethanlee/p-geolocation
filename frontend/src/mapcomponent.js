@@ -27,11 +27,11 @@ export class MapComponent extends Component {
 
     this.loader.load().then(async () => {
       console.log('Google Maps loaded');
-      const position = { lat: 34.100010, lng: -117.714802 };
+      const position = { lat: this.props.coordinates[0], lng: this.props.coordinates[1] };
 
       // Create a map
       this.map = new window.google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 5,
         center: position,
         mapId: 'estella',
       });
@@ -44,6 +44,17 @@ export class MapComponent extends Component {
         map: this.map,
         title: 'Estella',
       });
+
+      this.circle = new window.google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: this.map,
+        center: position,
+        radius: 400000, // Specify the radius in meters
+      });
     });
   }
 
@@ -52,7 +63,7 @@ export class MapComponent extends Component {
     return (
       <div>
         <h1>Here is your location:</h1>
-        <div id='map' style={{ width: '100%', height: '550px' }}></div>
+        <div id='map' style={{ width: '1400px', height: '420px', borderRadius: '30px'}}></div>
       </div>
     );
   }

@@ -6,6 +6,7 @@ from current import ConversionComponent
 import sys
 import os
 import unittest
+import pytz
 
 app = Flask(__name__)
 # CORS(app, resources={r"/sun_data_route/*": {"origins": "http://localhost:3000"}})
@@ -42,12 +43,29 @@ def get_data(locationInput, locationInput2):
         # Example: save files to a specific directory
         file1.save(f'./temporary_images/{locationInput}')
         file2.save(f'./temporary_images/{locationInput2}')
+        # print('hi', file=sys.stderr)
+        # print(request.form.get('timezone'), file=sys.stderr)
+        # print(str(request.form.get('timezone')), file=sys.stderr)
+        timezone = request.form.get('timezone')
 
-        timezone = request.json.get('timezone')
+        timezones = {}
+        for tz in pytz.all_timezones:
+            timezon = pytz.timezone(tz)
+            # Get the fixed UTC offset for the timezone (without considering DST)
+            current_offset = timezon.utcoffset(pytz.datetime.datetime(2000, 1, 1))  # Using an arbitrary date
+            # Convert the offset to a string in '+HH' or '-HH' format
+            offset_hours = current_offset.seconds // 3600
+            offset_str = f"{offset_hours:+03d}"  # Format the offset as '+HH' or '-HH'
+            # Store the timezone and its offset in the dictionary
+            timezones[tz] = offset_str
 
         # Perform calculations based on the received timezone
         # Example: Calculate longitude based on timezone
-        local_int = int(timezone.split(':')[0])
+        # local_int = timezones[str(timezone)]
+        local_int = timezones[str(timezone)]
+        # print(local_int, file=sys.stderr)
+        # print(str(timezone))
+        local_int = int(local_int)
         longitude = local_int * 15
 
 

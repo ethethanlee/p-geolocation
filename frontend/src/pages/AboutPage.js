@@ -36,7 +36,7 @@ const AboutPage = () => {
           For more information, contact us on our website at P-ai!
         </p>
         <p>
-          If you would like to sample our tool, here are two images taken by the Estella Science Building at Pomona College:
+          If you would like to sample our tool and are located in the PST timezone, here are two images taken by the Estella Science Building at Pomona College:
 
           <div>
             <p>Download File 1:</p>

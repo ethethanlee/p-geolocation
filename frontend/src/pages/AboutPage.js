@@ -9,6 +9,9 @@ const AboutPage = () => {
     paddingTop: '20px', 
   };
 
+  const file1Url = '/images/image1.jpeg';
+  const file2Url = '/images/image2.jpeg';
+
   return (
     <div style={{ paddingLeft: '50px', paddingRight: '50px' }}>
       < Overlay />
@@ -31,6 +34,22 @@ const AboutPage = () => {
         </p>
         <p>
           For more information, contact us on our website at P-ai!
+        </p>
+        <p>
+          If you would like to sample our tool, here are two images taken by the Estella Science Building at Pomona College:
+
+          <div>
+            <p>Download File 1:</p>
+            <a href={file1Url} download="pgeolocation-image1.jpeg">
+              Download File 1
+            </a>
+          </div>
+          <div>
+            <p>Download File 2:</p>
+            <a href={file2Url} download="pgeolocation-image2.jpeg">
+              Download File 2
+            </a>
+          </div>
         </p>
       </div>
     </div>

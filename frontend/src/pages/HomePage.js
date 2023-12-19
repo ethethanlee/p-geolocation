@@ -60,11 +60,13 @@ export class HomePage extends Component {
       const locationInput = files[0].name;
       const locationInput2 = files[1].name;
 
-      console.log('b')
-      // route
-      const url = `http://127.0.0.1:5000/sun_data_route/${locationInput}/${locationInput2}`;
+      const url = `http://34.219.123.171:5000/sun_data_route/${locationInput}/${locationInput2}`;
       console.log(url)
 
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      formData.append('timezone', timezone);
+      
       const response = await fetch(url, {
         method: 'POST',
         body: formData, //DONT FORGET TO CHANGE THIS BACK TO NOT A STRING 

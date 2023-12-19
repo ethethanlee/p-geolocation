@@ -26,10 +26,10 @@ def get_data(locationInput, locationInput2):
     # we have to update process_data so that it uses the pixel coordinates we get from sun_locater 
     # goes through the functions in current.py
     # return('hi')
-    now = datetime.datetime.now()
-    local_now = str(now.astimezone())[-6:]
-    local_int = int(local_now[:3])
-    longitude = local_int*15
+    # now = datetime.datetime.now()
+    # local_now = str(now.astimezone())[-6:]
+    # local_int = int(local_now[:3])
+    # longitude = local_int*15
 
     if request.method == 'GET':
         return f'GET request with parameters: locationInput={locationInput}, param_value2={locationInput2}'
@@ -43,6 +43,12 @@ def get_data(locationInput, locationInput2):
         file1.save(f'./temporary_images/{locationInput}')
         file2.save(f'./temporary_images/{locationInput2}')
 
+        timezone = request.json.get('timezone')
+
+        # Perform calculations based on the received timezone
+        # Example: Calculate longitude based on timezone
+        local_int = int(timezone.split(':')[0])
+        longitude = local_int * 15
 
 
         # form_data = request.form.to_dict()
